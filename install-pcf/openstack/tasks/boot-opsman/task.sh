@@ -19,7 +19,7 @@ function boot_opsman() {
 
   echo "Looking for $IMG_NAME in glance."
   openstack image list | grep -q $IMG_NAME
-  if [ $? != 0 ]; then 
+  if [ $? != 0 ]; then
     echo "$IMG_NAME is not available in glance."
     exit 1
   fi

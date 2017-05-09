@@ -21,8 +21,8 @@ function create_private_network() {
   local SUBNET=$2
 
   echo -n "Creating Network $NETNAME ($SUBNET): "
-  openstack network create $NETNAME 
-  openstack subnet create ${NETNAME}-subnet --network $NETNAME --subnet-range $SUBNET 
+  openstack network create $NETNAME
+  openstack subnet create ${NETNAME}-subnet --network $NETNAME --subnet-range $SUBNET
   check_rc $?
 }
 
@@ -58,10 +58,10 @@ function create_secgroup() {
 
      openstack security group create $SECGROUP_NAME
      check_rc $?
-   
+
      echo -"Adding rules to security group CF"
      # TCP
-     for port in 22 80 443 4443; do 
+     for port in 22 80 443 4443; do
        echo -n " - adding tcp $port: "
          neutron security-group-rule-create --direction ingress \
            --ethertype IPv4 --protocol tcp --port-range-min $port \

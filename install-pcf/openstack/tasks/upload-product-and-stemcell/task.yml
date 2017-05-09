@@ -1,5 +1,4 @@
 ---
-
 platform: linux
 
 image_resource:
@@ -22,8 +21,8 @@ params:
   OS_INTERFACE:
 
 inputs:
-  - name: pivnet-opsman-product
-  - name: pcf-pipelines
+- name: pivnet-opsman-product
+- name: pcf-pipelines
 
 run:
   path: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.sh

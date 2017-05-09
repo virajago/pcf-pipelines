@@ -24,7 +24,7 @@ jobs:
     plan:
     - get: pcf-pipelines
       trigger: false
-  
+
     - task: pave
       file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack/task.yml
       params:
@@ -51,10 +51,10 @@ jobs:
         PRE_OS_CACERT: {{pre_os_cacert}}
         OS_INTERFACE: {{os_interface}}
 
-  - name: install-opsmgr 
+  - name: install-opsmgr
     plan:
     - get: pivnet-opsman-product
-      params:  
+      params:
         globs:
         - "*.raw"
       trigger: false

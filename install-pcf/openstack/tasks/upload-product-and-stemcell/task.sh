@@ -19,14 +19,14 @@ function check_for_opsman() {
 
   echo "Looking for $IMG_NAME in glance."
   openstack image list | grep -q $IMG_NAME
-  if [ $? == 0 ]; then 
+  if [ $? == 0 ]; then
     echo "$IMG_NAME is already installed."
     exit 0
   fi
 
   echo "Installing: $IMG_NAME"
   openstack image create --disk-format qcow2 --container-format bare \
-    --private --file ./$OPSMAN_FILE $IMG_NAME 
+    --private --file ./$OPSMAN_FILE $IMG_NAME
 }
 
 check_for_opsman

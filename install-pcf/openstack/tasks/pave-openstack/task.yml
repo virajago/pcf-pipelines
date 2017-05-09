@@ -9,7 +9,7 @@ image_resource:
 inputs:
 - name: pcf-pipelines
 
-params: 
+params:
   EXTERNAL_NETWORK:
   INFRA_NETWORK:
   INFRA_SUBNET:

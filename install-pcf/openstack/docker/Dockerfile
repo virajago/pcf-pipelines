@@ -17,6 +17,3 @@ RUN chmod 755 /usr/local/bin/om-tool
 RUN chmod 755 /usr/local/bin/pivnet-cli
 RUN om-tool --version
 RUN pivnet-cli --version
-   
-
-
