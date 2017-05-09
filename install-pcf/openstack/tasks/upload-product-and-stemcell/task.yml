@@ -8,9 +8,8 @@ image_resource:
    repository: pivotalservices/openstack-tools
 
 params:
-  EXTERNAL_NETWORK:
-  INFRA_NETWORK:
   PRE_OS_CACERT:
+  OPS_MGR_IMG_NAME:
   OS_PROJECT_ID:
   OS_REGION_NAME:
   OS_USER_DOMAIN_NAME:
@@ -21,15 +20,10 @@ params:
   OS_USERNAME:
   PRE_OS_CACERT:
   OS_INTERFACE:
-  OPS_MGR_IMG_NAME:
-  OPS_MGR_SEC_GRP:
-  OPS_MGR_KEY_NAME:
-  OPS_MGR_FLV_NAME:
-  OPS_MGR_SRV_NAME:
 
 inputs:
-  - name: pcf-pipelines
   - name: pivnet-opsman-product
+  - name: pcf-pipelines
 
 run:
-  path: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman.sh
+  path: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.sh

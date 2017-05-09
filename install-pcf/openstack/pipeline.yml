@@ -26,7 +26,7 @@ jobs:
       trigger: false
   
     - task: pave
-      file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack.yml
+      file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack/task.yml
       params:
         EXTERNAL_NETWORK: {{external_network}}
         INFRA_NETWORK: {{infra_network}}
@@ -60,7 +60,7 @@ jobs:
       trigger: false
     - get: pcf-pipelines
     - task: deploy-opsman
-      file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell.yml
+      file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
       params:
         PRE_OS_CACERT: {{pre_os_cacert}}
         OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
@@ -85,7 +85,7 @@ jobs:
       trigger: false
     - get: pcf-pipelines
     - task: boot-opsman
-      file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman.yml
+      file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman/task.yml
       params:
         EXTERNAL_NETWORK: {{external_network}}
         INFRA_NETWORK: {{infra_network}}
