@@ -7,7 +7,7 @@ image_resource:
    repository: pivotalservices/openstack-tools
 
 params:
-  PRE_OS_CACERT:
+  OPENSTACK_CA_CERT:
   OPS_MGR_IMG_NAME:
   OS_PROJECT_ID:
   OS_REGION_NAME:
@@ -17,7 +17,7 @@ params:
   OS_PASSWORD:
   OS_AUTH_URL:
   OS_USERNAME:
-  PRE_OS_CACERT:
+  OPENSTACK_CA_CERT:
   OS_INTERFACE:
 
 inputs:

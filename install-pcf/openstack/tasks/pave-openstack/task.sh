@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "$PRE_OS_CACERT" > /ca.crt
+echo "$OPENSTACK_CA_CERT" > /ca.crt
 export OS_CACERT='/ca.crt'
 
 function check_rc() {

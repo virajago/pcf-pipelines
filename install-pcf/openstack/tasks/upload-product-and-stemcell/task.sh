@@ -3,7 +3,7 @@
 # If we are using a self signed SSL certificate,
 # export the location so the openstack-cli uses it.
 
-echo "$PRE_OS_CACERT" > /ca.crt
+echo "$OPENSTACK_CA_CERT" > /ca.crt
 export OS_CACERT='/ca.crt'
 
 function check_for_opsman() {
