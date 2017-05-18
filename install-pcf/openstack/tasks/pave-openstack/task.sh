@@ -90,7 +90,6 @@ create_private_network $ERT_NETWORK $ERT_SUBNET
 create_private_network $SERVICES_NETWORK $SERVICES_SUBNET
 create_private_network $SERVICESOD_NETWORK $SERVICESOD_SUBNET
 create_admin_router $ADMIN_ROUTER
-#create_backend_router $BACKEND_ROUTER
 create_secgroup $SECGROUP_NAME
 
 pivnet-cli --version
