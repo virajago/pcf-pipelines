@@ -49,14 +49,14 @@ jobs:
         OS_USERNAME: {{os_username}}
         OS_INTERFACE: {{os_interface}}
 
-  - name: install-opsmgr
+  - name: deploy-opsman
     plan:
     - get: pivnet-opsman-product
       params:
         globs:
         - "*.raw"
     - get: pcf-pipelines
-    - task: deploy-opsman
+    - task: upload
       file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
       params:
         OPENSTACK_CA_CERT: {{pre_os_cacert}}
@@ -70,16 +70,7 @@ jobs:
         OS_AUTH_URL: {{os_auth_url}}
         OS_USERNAME: {{os_username}}
         OS_INTERFACE: {{os_interface}}
-
-  - name: boot-opsman
-    plan:
-    - get: pivnet-opsman-product
-      passed: [install-opsmgr]
-      params:
-        globs:
-        - "*.raw"
-    - get: pcf-pipelines
-    - task: boot-opsman
+    - task: deploy
       file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman/task.yml
       params:
         EXTERNAL_NETWORK: {{external_network}}
@@ -99,4 +90,3 @@ jobs:
         OPS_MGR_KEY_NAME: {{ops_mgr_key_name}}
         OPS_MGR_FLV_NAME: {{ops_mgr_flv_name}}
         OPS_MGR_SRV_NAME: {{ops_mgr_srv_name}}
-
