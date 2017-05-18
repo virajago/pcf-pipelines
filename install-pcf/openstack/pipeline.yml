@@ -69,7 +69,6 @@ jobs:
         OS_PASSWORD: {{os_password}}
         OS_AUTH_URL: {{os_auth_url}}
         OS_USERNAME: {{os_username}}
-        PRE_OS_CACERT: {{pre_os_cacert}}
         OS_INTERFACE: {{os_interface}}
 
   - name: boot-opsman
@@ -94,7 +93,6 @@ jobs:
         OS_PASSWORD: {{os_password}}
         OS_AUTH_URL: {{os_auth_url}}
         OS_USERNAME: {{os_username}}
-        PRE_OS_CACERT: {{pre_os_cacert}}
         OS_INTERFACE: {{os_interface}}
         OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
         OPS_MGR_SEC_GRP: {{ops_mgr_sec_grp}}
