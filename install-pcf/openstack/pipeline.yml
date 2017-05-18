@@ -23,8 +23,6 @@ jobs:
   - name: pave-iaas
     plan:
     - get: pcf-pipelines
-      trigger: false
-
     - task: pave
       file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack/task.yml
       params:
@@ -57,7 +55,6 @@ jobs:
       params:
         globs:
         - "*.raw"
-      trigger: false
     - get: pcf-pipelines
     - task: deploy-opsman
       file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
@@ -82,7 +79,6 @@ jobs:
       params:
         globs:
         - "*.raw"
-      trigger: false
     - get: pcf-pipelines
     - task: boot-opsman
       file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman/task.yml
