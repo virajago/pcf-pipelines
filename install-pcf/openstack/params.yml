@@ -27,8 +27,9 @@ os_username:
 os_interface:
 pre_os_cacert:
 
-## Pivnet Requirements
-pivnet_api_token:
+## Resource configuration
+pivnet_api_token:                    # Pivotal Network token
+github_token:                        # GitHub token for higher API rate limit
 
 ## What to name the image in glance
 ops_mgr_img_name:
@@ -36,3 +37,9 @@ ops_mgr_sec_grp:
 ops_mgr_key_name:
 ops_mgr_flv_name:
 ops_mgr_srv_name:
+
+## Ops Mgr
+opsman_uri:
+opsman_admin_username:
+opsman_admin_password:
+om_decryption_pwd:
