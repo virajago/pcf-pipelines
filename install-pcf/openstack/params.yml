@@ -30,6 +30,7 @@ pre_os_cacert:
 ## Resource configuration
 pivnet_token:                        # Pivotal Network token
 github_token:                        # GitHub token for higher API rate limit
+opsman_major_minor_version: 1\.10\.* # Minor version of Ops Mgr to track
 
 ## What to name the image in glance
 ops_mgr_img_name:
