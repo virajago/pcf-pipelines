@@ -51,11 +51,12 @@ jobs:
 
   - name: deploy-opsman
     plan:
-    - get: pivnet-opsman-product
-      params:
-        globs:
-        - "*.raw"
-    - get: pcf-pipelines
+    - aggregate:
+      - get: pivnet-opsman-product
+        params:
+          globs:
+          - "*.raw"
+      - get: pcf-pipelines
     - task: upload
       file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
       params:
