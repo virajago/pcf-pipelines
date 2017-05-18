@@ -20,74 +20,74 @@ resources:
     product_version: 1\.10\..*
 
 jobs:
-  - name: pave-iaas
-    plan:
-    - get: pcf-pipelines
-    - task: pave
-      file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack/task.yml
-      params:
-        EXTERNAL_NETWORK: {{external_network}}
-        INFRA_NETWORK: {{infra_network}}
-        INFRA_SUBNET: {{infra_subnet}}
-        ERT_NETWORK: {{ert_network}}
-        ERT_SUBNET: {{ert_subnet}}
-        SERVICES_NETWORK: {{services_network}}
-        SERVICES_SUBNET: {{services_subnet}}
-        SERVICESOD_NETWORK: {{servicesod_network}}
-        SERVICESOD_SUBNET: {{servicesod_subnet}}
-        ADMIN_ROUTER: {{admin_router}}
-        BACKEND_ROUTER: {{backend_router}}
-        SECGROUP_NAME: {{secgroup_name}}
-        OPENSTACK_CA_CERT: {{pre_os_cacert}}
-        OS_PROJECT_ID: {{os_project_id}}
-        OS_REGION_NAME: {{os_region_name}}
-        OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
-        OS_PROJECT_NAME: {{os_project_name}}
-        OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
-        OS_PASSWORD: {{os_password}}
-        OS_AUTH_URL: {{os_auth_url}}
-        OS_USERNAME: {{os_username}}
-        OS_INTERFACE: {{os_interface}}
+- name: pave-iaas
+  plan:
+  - get: pcf-pipelines
+  - task: pave
+    file: pcf-pipelines/install-pcf/openstack/tasks/pave-openstack/task.yml
+    params:
+      EXTERNAL_NETWORK: {{external_network}}
+      INFRA_NETWORK: {{infra_network}}
+      INFRA_SUBNET: {{infra_subnet}}
+      ERT_NETWORK: {{ert_network}}
+      ERT_SUBNET: {{ert_subnet}}
+      SERVICES_NETWORK: {{services_network}}
+      SERVICES_SUBNET: {{services_subnet}}
+      SERVICESOD_NETWORK: {{servicesod_network}}
+      SERVICESOD_SUBNET: {{servicesod_subnet}}
+      ADMIN_ROUTER: {{admin_router}}
+      BACKEND_ROUTER: {{backend_router}}
+      SECGROUP_NAME: {{secgroup_name}}
+      OPENSTACK_CA_CERT: {{pre_os_cacert}}
+      OS_PROJECT_ID: {{os_project_id}}
+      OS_REGION_NAME: {{os_region_name}}
+      OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
+      OS_PROJECT_NAME: {{os_project_name}}
+      OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
+      OS_PASSWORD: {{os_password}}
+      OS_AUTH_URL: {{os_auth_url}}
+      OS_USERNAME: {{os_username}}
+      OS_INTERFACE: {{os_interface}}
 
-  - name: deploy-opsman
-    plan:
-    - aggregate:
-      - get: pivnet-opsman-product
-        params:
-          globs:
-          - "*.raw"
-      - get: pcf-pipelines
-    - task: upload
-      file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
+- name: deploy-opsman
+  plan:
+  - aggregate:
+    - get: pivnet-opsman-product
       params:
-        OPENSTACK_CA_CERT: {{pre_os_cacert}}
-        OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
-        OS_PROJECT_ID: {{os_project_id}}
-        OS_REGION_NAME: {{os_region_name}}
-        OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
-        OS_PROJECT_NAME: {{os_project_name}}
-        OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
-        OS_PASSWORD: {{os_password}}
-        OS_AUTH_URL: {{os_auth_url}}
-        OS_USERNAME: {{os_username}}
-        OS_INTERFACE: {{os_interface}}
-    - task: deploy
-      file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman/task.yml
-      params:
-        EXTERNAL_NETWORK: {{external_network}}
-        INFRA_NETWORK: {{infra_network}}
-        OPENSTACK_CA_CERT: {{pre_os_cacert}}
-        OS_PROJECT_ID: {{os_project_id}}
-        OS_REGION_NAME: {{os_region_name}}
-        OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
-        OS_PROJECT_NAME: {{os_project_name}}
-        OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
-        OS_PASSWORD: {{os_password}}
-        OS_AUTH_URL: {{os_auth_url}}
-        OS_USERNAME: {{os_username}}
-        OS_INTERFACE: {{os_interface}}
-        OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
-        OPS_MGR_SEC_GRP: {{ops_mgr_sec_grp}}
-        OPS_MGR_KEY_NAME: {{ops_mgr_key_name}}
-        OPS_MGR_FLV_NAME: {{ops_mgr_flv_name}}
-        OPS_MGR_SRV_NAME: {{ops_mgr_srv_name}}
+        globs:
+        - "*.raw"
+    - get: pcf-pipelines
+  - task: upload
+    file: pcf-pipelines/install-pcf/openstack/tasks/upload-product-and-stemcell/task.yml
+    params:
+      OPENSTACK_CA_CERT: {{pre_os_cacert}}
+      OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
+      OS_PROJECT_ID: {{os_project_id}}
+      OS_REGION_NAME: {{os_region_name}}
+      OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
+      OS_PROJECT_NAME: {{os_project_name}}
+      OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
+      OS_PASSWORD: {{os_password}}
+      OS_AUTH_URL: {{os_auth_url}}
+      OS_USERNAME: {{os_username}}
+      OS_INTERFACE: {{os_interface}}
+  - task: deploy
+    file: pcf-pipelines/install-pcf/openstack/tasks/boot-opsman/task.yml
+    params:
+      EXTERNAL_NETWORK: {{external_network}}
+      INFRA_NETWORK: {{infra_network}}
+      OPENSTACK_CA_CERT: {{pre_os_cacert}}
+      OS_PROJECT_ID: {{os_project_id}}
+      OS_REGION_NAME: {{os_region_name}}
+      OS_USER_DOMAIN_NAME: {{os_user_domain_name}}
+      OS_PROJECT_NAME: {{os_project_name}}
+      OS_IDENTITY_API_VERSION: {{os_identity_api_version}}
+      OS_PASSWORD: {{os_password}}
+      OS_AUTH_URL: {{os_auth_url}}
+      OS_USERNAME: {{os_username}}
+      OS_INTERFACE: {{os_interface}}
+      OPS_MGR_IMG_NAME: {{ops_mgr_img_name}}
+      OPS_MGR_SEC_GRP: {{ops_mgr_sec_grp}}
+      OPS_MGR_KEY_NAME: {{ops_mgr_key_name}}
+      OPS_MGR_FLV_NAME: {{ops_mgr_flv_name}}
+      OPS_MGR_SRV_NAME: {{ops_mgr_srv_name}}
