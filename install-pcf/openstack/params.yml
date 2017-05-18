@@ -28,7 +28,7 @@ os_interface:
 pre_os_cacert:
 
 ## Resource configuration
-pivnet_api_token:                    # Pivotal Network token
+pivnet_token:                        # Pivotal Network token
 github_token:                        # GitHub token for higher API rate limit
 
 ## What to name the image in glance
