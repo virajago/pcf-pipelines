@@ -10,7 +10,7 @@ pcf_opsman_bucket_path=$(grep -i 'us:.*.tar.gz' pivnet-opsmgr/*GCP.yml | cut -d'
 # ops-manager-us/pcf-gcp-1.9.2.tar.gz -> opsman-pcf-gcp-1-9-2
 pcf_opsman_image_name=$(echo $pcf_opsman_bucket_path | sed 's%.*/\(.*\).tar.gz%opsman-\1%' | sed 's/\./-/g')
 
-ert_sql_instance_name="${GCP_RESOURCE_PREFIX}-sql-$(cat /proc/sys/kernel/random/uuid)"
+ert_sql_instance_name="${GCP_RESOURCE_PREFIX}-sql"
 
 pcf_ert_ssl_cert=$PCF_ERT_SSL_CERT
 pcf_ert_ssl_key=$PCF_ERT_SSL_KEY
