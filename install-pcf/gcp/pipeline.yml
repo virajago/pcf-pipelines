@@ -21,21 +21,9 @@ resources:
     region_name: {{s3_region}}
     bucket: {{s3_bucket_terraform}}
     endpoint: {{s3_endpoint}}
-    regexp: "terraform/terraform-(.*).tfstate"
+    versioned_file: terraform.tfstate
     access_key_id: {{s3_access_key_id}}
     secret_access_key: {{s3_secret_access_key}}
-
-- name: tfstate-version
-  type: semver
-  source:
-   driver: s3
-   bucket: {{s3_bucket_terraform}}
-   key: terraform/version
-   access_key_id: {{s3_access_key_id}}
-   secret_access_key: {{s3_secret_access_key}}
-   endpoint: {{s3_endpoint}}
-   initial_version: 0.0.0
-   region_name: {{s3_region}}
 
 - name: pivnet-opsmgr
   type: pivnet
@@ -62,9 +50,6 @@ jobs:
   - aggregate:
     - get: pcf-pipelines
     - get: terraform-state
-    - get: tfstate-version
-      params:
-        bump: major
   - task: wipe
     file: pcf-pipelines/tasks/install-pcf-gcp/wipe-env/task.yml
     params:
@@ -74,9 +59,6 @@ jobs:
   - put: terraform-state
     params:
       file: wipe-output/*.tfstate
-  - put: tfstate-version
-    params:
-      file: tfstate-version/version
 
 - name: upload-opsman-image
   plan:
@@ -103,9 +85,6 @@ jobs:
       params:
         globs:
         - "*GCP.yml"
-    - get: tfstate-version
-      params:
-        bump: major
   - task: create-infrastructure
     file: pcf-pipelines/tasks/install-pcf-gcp/create-infrastructure/task.yml
     params:
@@ -131,9 +110,6 @@ jobs:
   - put: terraform-state
     params:
       file: create-infrastructure-output/*.tfstate
-  - put: tfstate-version
-    params:
-      file: tfstate-version/version
 
 - name: configure-director
   serial_groups: [opsman]
