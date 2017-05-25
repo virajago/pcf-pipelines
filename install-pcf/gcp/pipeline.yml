@@ -75,10 +75,26 @@ jobs:
       GCP_REGION: {{gcp_region}}
       GCP_SERVICE_ACCOUNT_KEY: {{gcp_service_account_key}}
 
+- name: create-initial-terraform-state
+  serial: true
+  plan:
+  - get: pcf-pipelines
+  - task: create-terraform-state
+    params:
+      S3_BUCKET_TERRAFORM: {{s3_bucket_terraform}}
+      AWS_ACCESS_KEY_ID: {{s3_access_key_id}}
+      AWS_SECRET_ACCESS_KEY: {{s3_secret_access_key}}
+    file: pcf-pipelines/tasks/create-initial-terraform-state/task.yml
+
 - name: create-infrastructure
   serial_groups: [terraform]
+  ensure:
+    put: terraform-state
+    params:
+      file: create-infrastructure-output/*.tfstate
   plan:
   - aggregate:
+    - get: terraform-state
     - get: pcf-pipelines
     - get: pivnet-opsmgr
       passed: [upload-opsman-image]
@@ -100,9 +116,6 @@ jobs:
       PCF_ERT_SSL_KEY: {{pcf_ert_ssl_key}}
       ERT_SQL_DB_USERNAME: {{ert_sql_db_username}}
       ERT_SQL_DB_PASSWORD: {{ert_sql_db_password}}
-  - put: terraform-state
-    params:
-      file: create-infrastructure-output/*.tfstate
 
 - name: configure-director
   serial_groups: [opsman]

@@ -56,9 +56,9 @@ Concourse. (See instructions below for how to run Minio in a Docker container.)
   ```
 
 4. Unpause the pipeline if you haven't already. `upload-opsman-image` will automatically upload the latest matching version of Operations Manager
-
-5. Trigger the `create-infrastructure` job. `create-infrastructure` will output at the end the DNS settings that you must configure before continuing.
-6. Once DNS is set up you can run `configure-director`. From there the pipeline should automatically run through to the end.
+5. Run the `create-initial-terraform-state` job manually. This will prepare the s3 resource that holds the terraform state.
+6. Trigger the `create-infrastructure` job. `create-infrastructure` will output at the end the DNS settings that you must configure before continuing.
+7. Once DNS is set up you can run `configure-director`. From there the pipeline should automatically run through to the end.
 
 ### Tearing down the environment
 
