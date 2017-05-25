@@ -49,7 +49,14 @@ Concourse. (See instructions below for how to run Minio in a Docker container.)
   * GCP DNS API [here](https://console.cloud.google.com/apis/api/dns)
   * GCP Cloud Resource Manager API [here](https://console.cloud.google.com/apis/api/cloudresourcemanager.googleapis.com/overview)
 
-2. Change all of the CHANGEME values in params.yml with real values
+2. Change all of the CHANGEME values in params.yml with real values. For the gcp_service_account_key, create a new service account key that has the following IAM roles:
+  * Cloud SQL Admin
+  * Compute Instance Admin (v1)
+  * Compute Network Admin
+  * Compute Security Admin
+  * DNS Administrator
+  * Storage Admin
+
 3. [Set the pipeline](http://concourse.ci/single-page.html#fly-set-pipeline), using your updated params.yml:
   ```
   fly -t lite set-pipeline -p deploy-pcf -c pipeline.yml -l params.yml
