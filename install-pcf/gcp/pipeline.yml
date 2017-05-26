@@ -76,7 +76,7 @@ jobs:
       GCP_REGION: {{gcp_region}}
       GCP_SERVICE_ACCOUNT_KEY: {{gcp_service_account_key}}
 
-- name: create-initial-terraform-state
+- name: bootstrap-terraform-state
   serial: true
   plan:
   - get: pcf-pipelines
