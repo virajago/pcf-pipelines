@@ -7,7 +7,7 @@ fi
 STEMCELL_VERSION=`cat ./pivnet-product/metadata.json | jq --raw-output '.Dependencies[] | select(.Release.Product.Name | contains("Stemcells")) | .Release.Version'`
 
 if [ -n "$STEMCELL_VERSION" ]; then
-  stemcell_exists=$(om-linux -t https://$OPS_MGR_HOST -u $OPS_MGR_USR -p $OPS_MGR_PWD -k curl --path "/api/v0/diagnostic_report" | jq '.stemcells' | grep $STEMCELL_VERSION | grep ${STEMCELL_GLOB//\*/})
+  stemcell_exists=$(om-linux -t https://$OPS_MGR_HOST -u $OPS_MGR_USR -p $OPS_MGR_PWD -k curl --silent --path "/api/v0/diagnostic_report" | jq '.stemcells' | grep $STEMCELL_VERSION | grep -c ${STEMCELL_GLOB//\*/})
 
   if [[ "$stemcell_exists" -eq "0" ]]; then
     echo "Downloading stemcell $STEMCELL_VERSION"
