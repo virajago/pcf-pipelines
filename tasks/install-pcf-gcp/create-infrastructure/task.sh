@@ -9,6 +9,8 @@ pcf_opsman_bucket_path=$(grep -i 'us:.*.tar.gz' pivnet-opsmgr/*GCP.yml | cut -d'
 # ops-manager-us/pcf-gcp-1.9.2.tar.gz -> opsman-pcf-gcp-1-9-2
 pcf_opsman_image_name=$(echo $pcf_opsman_bucket_path | sed 's%.*/\(.*\).tar.gz%opsman-\1%' | sed 's/\./-/g')
 
+# The random/uuid name is required because GCP doesn't allow you to recreate a
+# SQL instance with the same name in a short (unknown) window.
 ert_sql_instance_name="${GCP_RESOURCE_PREFIX}-sql-$(cat /proc/sys/kernel/random/uuid)"
 
 pcf_ert_ssl_cert=$PCF_ERT_SSL_CERT
