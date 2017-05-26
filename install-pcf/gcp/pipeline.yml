@@ -12,7 +12,7 @@ resources:
   type: git
   source:
     uri: git@github.com:pivotal-cf/pcf-pipelines.git
-    branch: master
+    branch: wip-khicks
     private_key: {{git_private_key}}
 
 - name: terraform-state
