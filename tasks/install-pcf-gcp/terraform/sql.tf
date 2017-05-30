@@ -33,85 +33,61 @@ resource "google_sql_database_instance" "master" {
       ]
     }
   }
-
-  count = "1"
 }
 
 resource "google_sql_database" "uaa" {
   name     = "uaa"
   instance = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "ccdb" {
   name       = "ccdb"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "notifications" {
   name       = "notifications"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "autoscale" {
   name       = "autoscale"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "app_usage_service" {
   name       = "app_usage_service"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "console" {
   name       = "console"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "routing" {
   name       = "routing"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "diego" {
   name       = "diego"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "account" {
   name       = "account"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "nfsvolume" {
   name       = "nfsvolume"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_database" "networkpolicyserver" {
   name       = "networkpolicyserver"
   instance   = "${google_sql_database_instance.master.name}"
-
-  count = "1"
 }
 
 resource "google_sql_user" "ert" {
@@ -119,6 +95,4 @@ resource "google_sql_user" "ert" {
   password   = "${var.ert_sql_db_password}"
   instance   = "${google_sql_database_instance.master.name}"
   host       = "%"
-
-  count = "1"
 }
