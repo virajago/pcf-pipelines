@@ -41,53 +41,53 @@ resource "google_sql_database" "uaa" {
 }
 
 resource "google_sql_database" "ccdb" {
-  name       = "ccdb"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "ccdb"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "notifications" {
-  name       = "notifications"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "notifications"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "autoscale" {
-  name       = "autoscale"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "autoscale"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "app_usage_service" {
-  name       = "app_usage_service"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "app_usage_service"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "console" {
-  name       = "console"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "console"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "routing" {
-  name       = "routing"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "routing"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "diego" {
-  name       = "diego"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "diego"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "account" {
-  name       = "account"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "account"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "nfsvolume" {
-  name       = "nfsvolume"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "nfsvolume"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_database" "networkpolicyserver" {
-  name       = "networkpolicyserver"
-  instance   = "${google_sql_database_instance.master.name}"
+  name     = "networkpolicyserver"
+  instance = "${google_sql_database_instance.master.name}"
 }
 
 resource "google_sql_user" "diego" {
