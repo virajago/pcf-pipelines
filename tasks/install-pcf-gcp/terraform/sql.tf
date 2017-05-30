@@ -102,6 +102,7 @@ resource "google_sql_user" "notifications" {
   password = "${var.db_notifications_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.diego"]
 }
 
 resource "google_sql_user" "autoscale" {
@@ -109,6 +110,7 @@ resource "google_sql_user" "autoscale" {
   password = "${var.db_autoscale_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.notifications"]
 }
 
 resource "google_sql_user" "uaa" {
@@ -116,6 +118,7 @@ resource "google_sql_user" "uaa" {
   password = "${var.db_uaa_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.autoscale"]
 }
 
 resource "google_sql_user" "app_usage_service" {
@@ -123,6 +126,7 @@ resource "google_sql_user" "app_usage_service" {
   password = "${var.db_app_usage_service_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.uaa"]
 }
 
 resource "google_sql_user" "ccdb" {
@@ -130,6 +134,7 @@ resource "google_sql_user" "ccdb" {
   password = "${var.db_ccdb_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.app_usage_service"]
 }
 
 resource "google_sql_user" "routing" {
@@ -137,6 +142,7 @@ resource "google_sql_user" "routing" {
   password = "${var.db_routing_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.ccdb"]
 }
 
 resource "google_sql_user" "account" {
@@ -144,6 +150,7 @@ resource "google_sql_user" "account" {
   password = "${var.db_accountdb_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.routing"]
 }
 
 resource "google_sql_user" "network_policy_server" {
@@ -151,6 +158,7 @@ resource "google_sql_user" "network_policy_server" {
   password = "${var.db_networkpolicyserverdb_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.account"]
 }
 
 resource "google_sql_user" "nfs_volume" {
@@ -158,4 +166,5 @@ resource "google_sql_user" "nfs_volume" {
   password = "${var.db_nfsvolumedb_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_user.network_policy_server"]
 }
