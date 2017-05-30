@@ -106,6 +106,7 @@ resource "google_sql_user" "diego" {
   password = "${var.db_diego_password}"
   instance = "${google_sql_database_instance.master.name}"
   host     = "%"
+  depends_on = ["google_sql_database.networkpolicyserver"]
 }
 
 resource "google_sql_user" "notifications" {
