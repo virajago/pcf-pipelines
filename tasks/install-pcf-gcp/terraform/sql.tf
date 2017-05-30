@@ -46,7 +46,6 @@ resource "google_sql_database" "uaa" {
 
 resource "google_sql_database" "ccdb" {
   name       = "ccdb"
-  depends_on = ["google_sql_database.uaa"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -54,7 +53,6 @@ resource "google_sql_database" "ccdb" {
 
 resource "google_sql_database" "notifications" {
   name       = "notifications"
-  depends_on = ["google_sql_database.ccdb"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -62,7 +60,6 @@ resource "google_sql_database" "notifications" {
 
 resource "google_sql_database" "autoscale" {
   name       = "autoscale"
-  depends_on = ["google_sql_database.notifications"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -70,7 +67,6 @@ resource "google_sql_database" "autoscale" {
 
 resource "google_sql_database" "app_usage_service" {
   name       = "app_usage_service"
-  depends_on = ["google_sql_database.autoscale"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -78,7 +74,6 @@ resource "google_sql_database" "app_usage_service" {
 
 resource "google_sql_database" "console" {
   name       = "console"
-  depends_on = ["google_sql_database.app_usage_service"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -86,7 +81,6 @@ resource "google_sql_database" "console" {
 
 resource "google_sql_database" "routing" {
   name       = "routing"
-  depends_on = ["google_sql_database.console"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -94,7 +88,6 @@ resource "google_sql_database" "routing" {
 
 resource "google_sql_database" "diego" {
   name       = "diego"
-  depends_on = ["google_sql_database.routing"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -102,7 +95,6 @@ resource "google_sql_database" "diego" {
 
 resource "google_sql_database" "account" {
   name       = "account"
-  depends_on = ["google_sql_database.diego"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -110,7 +102,6 @@ resource "google_sql_database" "account" {
 
 resource "google_sql_database" "nfsvolume" {
   name       = "nfsvolume"
-  depends_on = ["google_sql_database.account"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -118,7 +109,6 @@ resource "google_sql_database" "nfsvolume" {
 
 resource "google_sql_database" "networkpolicyserver" {
   name       = "networkpolicyserver"
-  depends_on = ["google_sql_database.nfsvolume"]
   instance   = "${google_sql_database_instance.master.name}"
 
   count = "1"
@@ -126,7 +116,6 @@ resource "google_sql_database" "networkpolicyserver" {
 
 resource "google_sql_user" "ert" {
   name       = "${var.ert_sql_db_username}"
-  depends_on = ["google_sql_database.diego"]
   password   = "${var.ert_sql_db_password}"
   instance   = "${google_sql_database_instance.master.name}"
   host       = "%"
