@@ -1,7 +1,8 @@
 resource "google_sql_database_instance" "master" {
   region           = "${var.gcp_region}"
   database_version = "MYSQL_5_6"
-  name             = "${var.ert_sql_instance_name}"
+  # name             = "${var.ert_sql_instance_name}"
+  name             = "concourse-sle1-sql-20a53aac-9b5e-496f-9782-37a3226042db"
 
   settings {
     tier = "db-f1-micro"
